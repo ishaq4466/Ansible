@@ -81,9 +81,22 @@ web.yml
 * ansible -i inv1 web.yml --check # --check flag can be used to dry-run the ansible playbook
 * If a playbook fails it generates a **retry file** for that playbook which can be run later
 
---- 
-- host: webserver
-  become
 
 
 
+```
+docker create --name=manager -it smartbuddy/ansible-centos7:manager #creating a container
+docker create --name=node1 -it smartbuddy/ansible-centos7:node #creating a container
+docker create --name=node2 -it smartbuddy/ansible-centos7:node #creating a container
+docker start manager
+docker start node2
+docker start node1
+
+docker run -idt -v /sys/fs/cgroup:/sys/fs/cgroup:ro --cap-add SYS_ADMIN --name centos1 smartbuddy/ansible-centos7:manager
+
+
+docker exec -it --user ansible manager /bin/bash
+docker exec -it --user ansible node1 /bin/bash
+docker exec -it --user ansible node2 /bin/bash
+
+```

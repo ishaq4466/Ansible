@@ -1,0 +1,8 @@
+# host1 ansible_host=localhost
+localhost ansible_connection=local
+
+[minions]
+52.91.5.173
+54.146.44.2
+localhost
+

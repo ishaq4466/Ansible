@@ -41,6 +41,8 @@ in "/etc/ansible/hosts"
 ```
 ansible host1 -m ping
 ansible host1 -m setup
+ansible localhost -i cusInv -m setup # running with module on local host with custom iventory file
+# localhost ansible_connection=local must be present in the host inventory file
 ansible host1 -b -m yum -a "name=httpd state=latest" 
 ansible host1 -b -m service -a "name=httpd state=started"
 # -b flag means become a su to install the package
@@ -78,7 +80,7 @@ web.yml
 ```
 
 * ansible-playbook -i inv web.yml 
-* ansible -i inv1 web.yml --check # --check flag can be used to dry-run the ansible playbook
+* ansible host1 -i inv1 web.yml --check # --check flag can be used to dry-run the ansible playbook
 * If a playbook fails it generates a **retry file** for that playbook which can be run later
 
 
